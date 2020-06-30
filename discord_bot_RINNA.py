@@ -1,27 +1,33 @@
 import discord
 import asyncio
+import datetime
+from discord.ext import tasks
 
 client = discord.Client()
 
 @client.event
 async def on_ready():
+    loop.start()
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
     print('------')
 
+n_time=datetime.datetime.now()
+@tasks.loop(seconds=60)
+async def loop():
+    if not client.is_ready():
+        return
+    c_time="22:50"
+    if n_time.weekday()==1:
+        if n_time.strftime('%H:%M')==c_time:
+            channel_id = client.get_channel(721738331968241752)
+            await channel_id.send('みんな会議だよ\tしゅーごー')
+#    if message.content.startswith('今何時？'):
+#        await client.send_message(message.channel, n_time.time())
 @client.event
 async def on_message(message):
-    if message.content.startswith('好きだよ'):
-        counter = 0
-        tmp = await client.send_message(message.channel, '私も好き')
-        async for log in client.logs_from(message.channel, limit=100):
-            if log.author == message.author:
-                counter += 1
-
-        await client.edit_message(tmp, 'You have {} messages.'.format(counter))
-    elif message.content.startswith('一緒に寝よ'):
-        await asyncio.sleep(5)
-        await client.send_message(message.channel, 'ちょっと恥ずかしいよ')
+    if message.content.startswith('今何時？'):
+        await client.send_message(message.channel, n_time.time())
 
 client.run('NDY2NDAyODQyNTAwOTIzMzky.DimuMQ.zWnIzerHztwo_rHnqRhvqB68GdE')
