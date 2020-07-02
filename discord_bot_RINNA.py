@@ -24,10 +24,10 @@ async def loop():
         return
     c_time="22:50"
     n_time = datetime.datetime.now()
-    if n_time.weekday()==2:
+    if n_time.weekday()==6:
         if n_time.strftime('%H:%M')==c_time:
             await channel_id.send(chousei())
     if n_time.weekday()==1:
         if n_time.strftime('%H:%M')==c_time:
-            await channel_id.send('みんな会議だよ\tしゅーごー')
+            await channel_id.send('説アレキだよ\tしゅーごー')
 client.run('NDY2NDAyODQyNTAwOTIzMzky.DimuMQ.zWnIzerHztwo_rHnqRhvqB68GdE')

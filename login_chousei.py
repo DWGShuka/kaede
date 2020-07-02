@@ -11,6 +11,8 @@ def chousei():
     form['comment']='今週もよろしくお願いします'
     form['kouho']= strweek[0] +'\n'+ strweek[1]+ '\n'+ strweek[2]+ '\n'+ strweek[3]+ '\n'+ strweek[4]+ '\n'+ strweek[5] +'\n'+ strweek[6]
     browser.submit_form(form,headers={'Referer':browser.url,'Accept-Language':'ja,en-US;q=0.7,en;q=0.3',})
+    string=str(browser.find(attrs={'id':'listUrl'}))
+    url=string[103:-3]
+    print(url)
     print('on processing')
-    print(browser.find(attrs={'id':'listUrl'}))
-    return browser.find(attrs={'id':'listUrl'})
+    return url
